@@ -1,32 +1,58 @@
-# ✋ AirTask  
+# ✋ AirTask
 
-AirTask is an **AI-powered hand gesture recognition system** that enables seamless interaction with your computer using just your hands.  
-It combines **computer vision** and **machine learning** to create three powerful modules:  
+AI-powered hand gesture recognition system for touchless computer interaction using OpenCV + MediaPipe.
 
-- 🖼️ **Air Image Navigation** → Navigate images using hand gestures  
-- ✍️ **Air Write** → Write in the air with your index finger  
-- 🖱️ **Handy Mouse** → Full gesture-based mouse control  
+## Modules
 
----
+### 🖼️ Air Vision Image Navigator
+Browse images using hand gestures.
+- **Next/Previous Image:** Spread index + middle finger apart (>100px), direction based on which finger leads
+- **Zoom In:** Pinch thumb + index close together (<40px)
+- **Zoom Out:** Spread thumb + index apart (>100px)
+- Reads images from `images/` folder (`.png`, `.jpg`, `.jpeg`)
 
-## 🚀 Features  
-- Real-time **hand tracking** using OpenCV & Mediapipe  
-- Smooth and accurate **gesture recognition**  
-- Replace traditional mouse & keyboard inputs with **natural hand gestures**  
-- Lightweight and works on standard webcams  
+### ✍️ AirWrite
+Draw in the air using your index finger.
+- **Draw:** Raise index finger above knuckle line (others down)
+- **Select Color:** Hover index finger over top color bar (Red / Green / Blue / Black / Eraser)
+- **Stop Drawing:** Lower index finger
+- Smoothed cursor tracking for steadier strokes
 
----
+### 🖱️ HandyMouse
+Full gesture-based mouse control.
+| Gesture | Action |
+|---|---|
+| Move hand | Move cursor |
+| Index finger up | Left click |
+| Middle finger up | Right click |
+| Index + middle up | Double click |
+| Pinch index + thumb | Drag & drop |
+| Hand up / down | Scroll up / down |
+| Two hands apart / close | Zoom in / out |
+| Two index fingers crossed | Screenshot |
+| Fist + move left/right | Switch windows (Alt+Tab) |
 
-## 🛠️ Tech Stack  
-- **Languages:** Python  
-- **Libraries:** OpenCV, Mediapipe, NumPy  
-- **Tools:** Jupyter Notebook / VS Code  
+## Tech Stack
+- **Language:** Python 3.12
+- **Libraries:** OpenCV, MediaPipe, NumPy, PyAutoGUI
 
----
+## Setup
 
-## 📦 Installation  
+```bash
+python -m venv venv
+venv\Scripts\activate        # Windows
+pip install -r requirements.txt
+```
 
-1. Clone this repository  
-   ```bash
-   git clone https://github.com/lakshit2234/AirTask
-   cd AirTask
+Run any module:
+```bash
+python AirVisionImageNavigator.py
+python AirWrite.py
+python HandyMouse.py
+```
+
+Press `q` to quit any module. Requires a webcam.
+
+## Notes
+- Runs on standard webcams, no special hardware needed
+- HandyMouse includes PyAutoGUI fail-safe (move cursor to screen corner to force-stop)
